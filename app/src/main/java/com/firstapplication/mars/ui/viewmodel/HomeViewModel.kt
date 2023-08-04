@@ -10,9 +10,12 @@ import com.firstapplication.mars.domain.model.MarsModel
 import com.firstapplication.mars.domain.model.SideEffect
 import com.firstapplication.mars.domain.repository.MarsInfoRepository
 import com.firstapplication.mars.ui.setValueWithDispatcher
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class HomeViewModel(
+@HiltViewModel
+class HomeViewModel @Inject constructor(
     private val dispatchers: Dispatchers,
     private val marsInfoRepository: MarsInfoRepository
 ) : ViewModel() {

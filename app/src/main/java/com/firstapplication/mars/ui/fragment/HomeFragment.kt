@@ -1,33 +1,22 @@
 package com.firstapplication.mars.ui.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.firstapplication.mars.R
-import com.firstapplication.mars.appComponent
 import com.firstapplication.mars.databinding.FragmentHomeBinding
 import com.firstapplication.mars.ui.adapter.MarsAdapter
 import com.firstapplication.mars.ui.viewmodel.HomeViewModel
-import com.firstapplication.mars.ui.viewmodel.factory.HomeViewModelFactory
-import dagger.Lazy
-import javax.inject.Inject
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
-    @Inject
-    lateinit var homeViewModelFactory: Lazy<HomeViewModelFactory>
-
-    private val viewModel: HomeViewModel by viewModels { homeViewModelFactory.get() }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        context.appComponent.inject(this)
-    }
+    private val viewModel: HomeViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

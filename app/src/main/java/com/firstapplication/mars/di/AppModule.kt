@@ -4,6 +4,8 @@ import com.firstapplication.mars.data.remote.MARS_URL
 import com.firstapplication.mars.data.remote.MarsApiService
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainCoroutineDispatcher
@@ -12,6 +14,7 @@ import javax.inject.Singleton
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @Module
+@InstallIn(SingletonComponent::class)
 object AppModule {
 
     @Provides

@@ -1,7 +1,8 @@
 plugins {
-    id 'com.android.application'
-    id 'kotlin-android'
-    id 'kotlin-kapt'
+    id("com.android.application")
+    id("kotlin-android")
+    id("kotlin-kapt")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -39,7 +40,6 @@ android {
 ext {
     retrofitVersion = "2.9.0"
     lifecycleVersion = "2.5.1"
-    daggerVersion = "2.43.2"
     navigationVersion = "2.5.2"
     coroutineVersion = "1.6.4"
     glideVersion = "4.15.1"
@@ -71,12 +71,12 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:$lifecycleVersion"
 
-    //Dagger
-    implementation "com.google.dagger:dagger:$daggerVersion"
-    kapt "com.google.dagger:dagger-compiler:$daggerVersion"
-
     //Glide
     implementation "com.github.bumptech.glide:glide:$glideVersion"
+
+    //Hilt
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     //Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
