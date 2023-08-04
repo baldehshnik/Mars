@@ -1,7 +1,7 @@
 package com.firstapplication.mars.di
 
 import android.content.Context
-import com.firstapplication.mars.ui.fragments.HomeFragment
+import com.firstapplication.mars.ui.fragment.HomeFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 interface AppComponent {
 
-    fun activityComponentBuilder(): ActivitySubComponent.Builder
+    fun inject(fragment: HomeFragment)
 
     @Component.Builder
     interface Builder {
@@ -20,5 +20,4 @@ interface AppComponent {
 
         fun build(): AppComponent
     }
-
 }

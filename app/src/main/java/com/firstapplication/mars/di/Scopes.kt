@@ -4,4 +4,8 @@ import javax.inject.Scope
 
 @Scope
 @Retention(AnnotationRetention.RUNTIME)
-annotation class ActivityScope
+annotation class MainDispatcher
+
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class IODispatcher

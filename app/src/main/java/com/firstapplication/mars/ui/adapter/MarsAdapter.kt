@@ -1,4 +1,4 @@
-package com.firstapplication.mars.ui.adapters
+package com.firstapplication.mars.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.firstapplication.mars.R
 import com.firstapplication.mars.databinding.MarsItemBinding
-import com.firstapplication.mars.ui.models.MarsModel
+import com.firstapplication.mars.domain.model.MarsModel
 
 class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffUtil()) {
 
@@ -21,7 +22,7 @@ class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffU
 
         @SuppressLint("SetTextI18n")
         fun bind(model: MarsModel) = with(binding) {
-            twPrice.text = "${model.price} $"
+//            twPrice.text = "${model.price} $"
 
             val imageUri = model.imageSrcUrl.toUri()
                 .buildUpon()
@@ -30,9 +31,11 @@ class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffU
 
             Glide.with(imgMars.context)
                 .load(imageUri)
+                .transition(withCrossFade())
                 .apply(
                     RequestOptions()
-                        .placeholder(R.drawable.ic_baseline_broken_image_24)
+                        .placeholder(R.drawable.round_image_search)
+                        .error(R.drawable.round_broken_image)
                 )
                 .into(imgMars)
         }
@@ -47,7 +50,6 @@ class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffU
     override fun onBindViewHolder(holder: MarsViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
-
 }
 
 class MarsDiffUtil : DiffUtil.ItemCallback<MarsModel>() {

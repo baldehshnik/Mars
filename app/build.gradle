@@ -5,12 +5,12 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.firstapplication.mars"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -28,6 +28,7 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
+        freeCompilerArgs = ["-Xjvm-default=enable"]
         jvmTarget = '1.8'
     }
     buildFeatures {
@@ -41,7 +42,7 @@ ext {
     daggerVersion = "2.43.2"
     navigationVersion = "2.5.2"
     coroutineVersion = "1.6.4"
-    glideVersion = "4.14.2"
+    glideVersion = "4.15.1"
 }
 
 dependencies {

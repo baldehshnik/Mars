@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/navHome"
-        android:name="com.firstapplication.mars.ui.fragments.HomeFragment"
+        android:name="com.firstapplication.mars.ui.fragment.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
 </navigation>
