@@ -11,7 +11,7 @@ open class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         Toast.makeText(requireContext(), getStringValue(stringId), Toast.LENGTH_SHORT).show()
     }
 
-    private fun getStringValue(@StringRes stringId: Int): String {
+    fun getStringValue(@StringRes stringId: Int): String {
         return resources.getString(stringId)
     }
 }
