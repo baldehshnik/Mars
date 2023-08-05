@@ -12,5 +12,8 @@
     <color name="gray">#FF858585</color>
 
     <color name="dark_orange">#FF811E00</color>
-    <color name="dark_orange_26">#43811E00</color>
+    <color name="dark_orange_40">#65811E00</color>
+    <color name="dark_orange_50">#80531503</color>
+
+    <color name="background">#FF121212</color>
 </resources>
