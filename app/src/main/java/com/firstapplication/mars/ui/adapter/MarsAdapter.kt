@@ -1,36 +1,40 @@
 package com.firstapplication.mars.ui.adapter
 
-import android.annotation.SuppressLint
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.firstapplication.mars.R
 import com.firstapplication.mars.databinding.MarsItemBinding
 import com.firstapplication.mars.domain.model.MarsModel
+import com.firstapplication.mars.ui.utils.OnMarsImageClickListener
 
-class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffUtil()) {
+class MarsAdapter(
+    private val listener: OnMarsImageClickListener
+) : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffUtil()) {
 
     class MarsViewHolder(
-        private val binding: MarsItemBinding
+        private val binding: MarsItemBinding,
+        private val listener: OnMarsImageClickListener
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SetTextI18n")
         fun bind(model: MarsModel) = with(binding) {
-            val imageUri = model.imageSrcUrl.toUri()
-                .buildUpon()
-                .scheme("https")
-                .build()
-
+            var isImageLoaded = false
+            imgMars.transitionName = model.id
             Glide.with(imgMars.context)
-                .load(imageUri)
+                .load(model.imageSrcUrl)
+                .addListener(getImageLoadingListener { isImageLoaded = true })
                 .transition(withCrossFade())
                 .centerCrop()
                 .apply(
@@ -39,12 +43,37 @@ class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffU
                         .error(R.drawable.round_broken_image)
                 )
                 .into(imgMars)
+
+            imgMars.setOnClickListener {
+                if (isImageLoaded) {
+                    listener.onClick(model, imgMars)
+                }
+            }
+        }
+
+        private inline fun getImageLoadingListener(crossinline onSuccess: () -> Unit): RequestListener<Drawable> {
+            return object : RequestListener<Drawable> {
+                override fun onLoadFailed(
+                    e: GlideException?, model: Any?,
+                    target: Target<Drawable>?, isFirstResource: Boolean
+                ): Boolean {
+                    return false
+                }
+
+                override fun onResourceReady(
+                    resource: Drawable?, model: Any?, target: Target<Drawable>?,
+                    dataSource: DataSource?, isFirstResource: Boolean
+                ): Boolean {
+                    onSuccess()
+                    return false
+                }
+            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MarsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return MarsViewHolder(MarsItemBinding.inflate(layoutInflater))
+        return MarsViewHolder(MarsItemBinding.inflate(layoutInflater), listener)
     }
 
     override fun onBindViewHolder(holder: MarsViewHolder, position: Int) {
@@ -53,9 +82,7 @@ class MarsAdapter : ListAdapter<MarsModel, MarsAdapter.MarsViewHolder>(MarsDiffU
     }
 
     private fun startAnimation(view: View) {
-        val animation = AnimationUtils.loadAnimation(view.context, R.anim.recycler_view_item).also {
-            it.duration = 200
-        }
+        val animation = AnimationUtils.loadAnimation(view.context, R.anim.recycler_view_item)
         view.startAnimation(animation)
     }
 }

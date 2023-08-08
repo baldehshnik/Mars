@@ -2,5 +2,9 @@
 <resources>
 
     <string name="home_fragment_refresh_button">Refresh home fragment</string>
+    <string name="detail_image_view">ImageView in ImageDetailFragment</string>
+    <string name="mars_item_image_view">ImageView in RecyclerView item</string>
+
+    <string name="transition_name">image</string>
 
 </resources>

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Mars Images</string>
-    <string name="mars_image">mars image</string>
     <string name="error">Error</string>
+    <string name="none">None</string>
+
+    <string name="image_number">Image %s</string>
 </resources>

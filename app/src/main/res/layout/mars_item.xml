@@ -19,7 +19,8 @@
             android:id="@+id/imgMars"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/mars_image"
+            android:transitionName="image"
+            android:contentDescription="@string/mars_item_image_view"
             tools:src="@drawable/ic_launcher_background" />
 
     </com.google.android.material.card.MaterialCardView>

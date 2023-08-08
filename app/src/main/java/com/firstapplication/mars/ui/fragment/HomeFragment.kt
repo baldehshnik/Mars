@@ -2,35 +2,54 @@ package com.firstapplication.mars.ui.fragment
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.firstapplication.mars.R
 import com.firstapplication.mars.databinding.FragmentHomeBinding
+import com.firstapplication.mars.domain.model.MarsModel
 import com.firstapplication.mars.ui.adapter.MarsAdapter
 import com.firstapplication.mars.ui.utils.HomeFragmentLoadingViewState
+import com.firstapplication.mars.ui.utils.OnMarsImageClickListener
 import com.firstapplication.mars.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseFragment(), OnMarsImageClickListener {
+
+    private var recompose = false
 
     private var _binding: FragmentHomeBinding? = null
     private val binding: FragmentHomeBinding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels()
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_home, container, false).also {
+            _binding = FragmentHomeBinding.bind(it)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        _binding = FragmentHomeBinding.bind(view)
 
-        if (savedInstanceState != null) {
+        if (savedInstanceState != null || recompose) {
+            recompose = false
             viewModel.readMarsModels()
         }
 
-        val marsAdapter = MarsAdapter()
+        val marsAdapter = MarsAdapter(this)
         binding.rwMarsProperties.adapter = marsAdapter
         binding.rwMarsProperties.layoutManager = GridLayoutManager(
             requireContext(),
@@ -44,9 +63,15 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         }
     }
 
+    override fun onClick(model: MarsModel, imageView: ImageView) {
+        val extras = FragmentNavigatorExtras(imageView to getStringValue(R.string.transition_name))
+        findNavController().navigate(HomeFragmentDirections.actionNavHomeToNavDetail(model), extras)
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        recompose = true
     }
 
     private fun changeScreenVisibility(isProgressBarVisible: Boolean) {

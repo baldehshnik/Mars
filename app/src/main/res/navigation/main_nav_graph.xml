@@ -8,6 +8,20 @@
     <fragment
         android:id="@+id/navHome"
         android:name="com.firstapplication.mars.ui.fragment.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navHome_to_navDetail"
+            app:destination="@id/navDetail" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navDetail"
+        android:name="com.firstapplication.mars.ui.fragment.ImageDetailFragment"
+        android:label="@string/none"
+        tools:layout="@layout/fragment_image_detail">
+        <argument
+            android:name="model"
+            app:argType="com.firstapplication.mars.domain.model.MarsModel" />
+    </fragment>
 </navigation>

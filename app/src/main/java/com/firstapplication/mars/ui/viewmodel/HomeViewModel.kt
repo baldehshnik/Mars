@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.firstapplication.mars.di.Dispatchers
+import com.firstapplication.mars.domain.model.MarsModel
 import com.firstapplication.mars.domain.model.SideEffect
 import com.firstapplication.mars.domain.repository.MarsInfoRepository
 import com.firstapplication.mars.ui.utils.HomeFragmentLoadingViewState
@@ -19,15 +20,23 @@ class HomeViewModel @Inject constructor(
     private val marsInfoRepository: MarsInfoRepository
 ) : ViewModel() {
 
+    private var loadedDate: List<MarsModel>? = null
+
     private val _state = MutableLiveData<SideEffect<HomeFragmentLoadingViewState>>()
     val state: LiveData<SideEffect<HomeFragmentLoadingViewState>> get() = _state
 
     fun readMarsModels() {
         _state.value = SideEffect(HomeFragmentLoadingViewState.Loading)
+
+        if (loadedDate != null) {
+            _state.value = SideEffect(HomeFragmentLoadingViewState.Loaded(loadedDate!!))
+            return
+        }
+
         viewModelScope.launch(dispatchers.ioDispatcher) {
             try {
-                val properties = marsInfoRepository.getMarsProperties()
-                _state.setValueWithMainDispatcher(SideEffect(HomeFragmentLoadingViewState.Loaded(properties)))
+                loadedDate = marsInfoRepository.getMarsProperties()
+                _state.setValueWithMainDispatcher(SideEffect(HomeFragmentLoadingViewState.Loaded(loadedDate!!)))
             } catch (e: Exception) {
                 _state.setValueWithMainDispatcher(SideEffect(HomeFragmentLoadingViewState.Error))
             }
