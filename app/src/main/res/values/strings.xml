@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">Mars Images</string>
-    <string name="error">Error</string>
-    <string name="none">None</string>
+    <string name="app_name" translatable="true">Mars Images</string>
+    <string name="error" translatable="true">Error</string>
+    <string name="none" translatable="true">None</string>
+    <string name="some_facts_about_mars" translatable="true">Some facts about Mars</string>
 
-    <string name="image_number">Image %s</string>
+    <string name="image_number" translatable="true">Image %s</string>
+    <string name="fact_format" translatable="false"><![CDATA["&#160&#160<b>%1$d.</b> %2$s"]]></string>
+
 </resources>

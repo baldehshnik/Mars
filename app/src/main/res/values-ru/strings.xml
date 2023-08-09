@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Картинки Марса</string>
+    <string name="error">Ошибка</string>
+    <string name="none">Пусто</string>
+    <string name="some_facts_about_mars">Некоторые факты о Марсе</string>
+
+    <string name="image_number">Картинка %s</string>
+</resources>

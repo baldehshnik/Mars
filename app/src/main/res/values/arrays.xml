@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="mars_info" translatable="true">
+        <item>\tMars is a harsh and aggressive planet, beautiful in its lifelessness.
+        Only very recently has it become possible to photograph this beautiful satellite of the Sun.
+        A photo of Mars in different color palettes is eye-catching.
+        Its surface is not without charm, and sunrises and sunsets on Mars awaken in the soul the admiration of its Creator.</item>
+
+        <item>\tMars is a lifeless satellite of the Sun, which is in fourth place from it among other satellites.</item>
+
+        <item>\tIs there life on Mars? This is the most popular question people ask themselves about this planet.
+        In support of the theory of evolution, scientists have explored Mars to find even the slightest sign of life in the past, which would confirm their theory.
+        But so far, there is no real evidence that there can be life on Mars.</item>
+
+        <item>\tAlthough Mars is located in a narrow band of the habitable zone where liquid water is possible, it does not have enough mass to hold an atmosphere.
+        Low atmospheric pressure causes water to boil away.</item>
+
+        <item>\tResearch by the National Aeronautics and Space Agency (NASA) has found evidence that at least one huge canyon on Mars, previously thought to have been carved by water, was instead formed by a cataclysmic lava flow.</item>
+
+        <item>\tMars has two satellites in the form of shapeless colossal boulders - Phobos and Deimos.</item>
+
+        <item>\tMars has a very rarefied atmosphere - its atmospheric pressure is only about 1% of the pressure on Earth.
+        This is equivalent to a pressure of 35 kilometers above the Earth\'s surface.</item>
+
+        <item>\tThe most extreme forms of weather on Mars are winds, dust storms, frost, and fog. As a result of such weather activity, significant traces of erosion have been observed in some areas of the Red Planet.</item>
+
+        <item>\tThe northern hemisphere of Mars has a fairly smooth relief and only a few craters, while the southern hemisphere is literally dotted with hills and craters of various sizes.</item>
+
+        <item>\tDust storms form on the planet Mars, which turn out to form \'toxic snow\' of bleach-like chemicals, rendering life impossible on the planet\'s surface.</item>
+
+        <item>\tOf all the terrestrial planets, Mars is the only one on which the year lasts longer than on Earth. This is due to its orbital distance from the Sun.
+        One Martian year is equal to almost 686 Earth days. A Martian day lasts approximately 24 hours and 40 minutes, which is the time it takes for the planet to complete one complete revolution on its axis.</item>
+
+        <item>\tMars is at a distance of about 227,940,000 kilometers from the Sun. Mars has no magnetic field.</item>
+
+        <item>\tSince Mars has polar ice, it is possible that at some point in the past, a catastrophic event involving lava action melted planetary ice and formed deep canyons.</item>
+
+        <item>\tOn Mars is the most gigantic volcano known to date - Olympus Mons and the most grandiose of the known canyons - Mariner (Mariner Valley).
+        The height of Mount Olympus is 21 km (that\'s three times higher than Everest, the highest mountain on Earth), and the diameter is 600 km.
+        The Mariner Valley is 4000 km long, 200 km wide and almost 7 km deep.</item>
+    </string-array>
+</resources>

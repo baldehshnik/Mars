@@ -10,6 +10,7 @@ import androidx.transition.TransitionInflater
 import com.bumptech.glide.Glide
 import com.firstapplication.mars.R
 import com.firstapplication.mars.databinding.FragmentImageDetailBinding
+import com.firstapplication.mars.ui.adapter.MarsFactAdapter
 
 class ImageDetailFragment : BaseFragment() {
 
@@ -26,13 +27,14 @@ class ImageDetailFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_image_detail, container, false).also {
             _binding = FragmentImageDetailBinding.bind(it)
             loadAnimation()
+            changeToolbarText()
         }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadMarsInformation()
 
-        changeToolbarText()
         Glide.with(binding.img.context)
             .load(arguments.model.imageSrcUrl)
             .into(binding.img)
@@ -41,6 +43,11 @@ class ImageDetailFragment : BaseFragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun loadMarsInformation() {
+        val adapter = MarsFactAdapter(resources.getStringArray(R.array.mars_info))
+        binding.rwMarsInfo.adapter = adapter
     }
 
     private fun changeToolbarText() {
