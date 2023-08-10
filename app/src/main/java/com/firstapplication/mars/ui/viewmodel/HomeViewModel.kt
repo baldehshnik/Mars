@@ -26,17 +26,18 @@ class HomeViewModel @Inject constructor(
     val state: LiveData<SideEffect<HomeFragmentLoadingViewState>> get() = _state
 
     fun readMarsModels() {
-        _state.value = SideEffect(HomeFragmentLoadingViewState.Loading)
-
         if (loadedDate != null) {
             _state.value = SideEffect(HomeFragmentLoadingViewState.Loaded(loadedDate!!))
             return
         }
 
+        _state.value = SideEffect(HomeFragmentLoadingViewState.Loading)
         viewModelScope.launch(dispatchers.ioDispatcher) {
             try {
                 loadedDate = marsInfoRepository.getMarsProperties()
-                _state.setValueWithMainDispatcher(SideEffect(HomeFragmentLoadingViewState.Loaded(loadedDate!!)))
+                _state.setValueWithMainDispatcher(
+                    SideEffect(HomeFragmentLoadingViewState.Loaded(loadedDate!!))
+                )
             } catch (e: Exception) {
                 _state.setValueWithMainDispatcher(SideEffect(HomeFragmentLoadingViewState.Error))
             }
