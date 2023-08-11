@@ -1,10 +1,13 @@
 package com.firstapplication.mars.ui.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.ui.AppBarConfiguration
@@ -14,8 +17,11 @@ import com.bumptech.glide.Glide
 import com.firstapplication.mars.R
 import com.firstapplication.mars.databinding.FragmentImageDetailBinding
 import com.firstapplication.mars.ui.adapter.MarsFactAdapter
+import com.firstapplication.mars.ui.utils.ShareButtonInterpolator
 import com.firstapplication.mars.ui.utils.getAnimationListener
 import com.firstapplication.mars.ui.utils.getTransitionListener
+
+const val SHARE_TYPE = "text/plain"
 
 class ImageDetailFragment : BaseFragment() {
 
@@ -32,7 +38,13 @@ class ImageDetailFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_image_detail, container, false).also {
             _binding = FragmentImageDetailBinding.bind(it)
             (activity as AppCompatActivity).setSupportActionBar(binding.toolbar)
-            loadAnimation()
+
+            if (savedInstanceState == null) {
+                loadAnimation()
+            } else {
+                binding.titleCard.isVisible = true
+                binding.btnShare.isVisible = true
+            }
         }
     }
 
@@ -64,11 +76,31 @@ class ImageDetailFragment : BaseFragment() {
                 }
             )
         )
+
+        binding.btnShare.setOnClickListener {
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.share_button)
+            animation.interpolator = ShareButtonInterpolator(0.2, 10.0)
+            it.startAnimation(animation)
+            share()
+        }
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
+    }
+
+    private fun share() {
+        val intent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(
+                Intent.EXTRA_TEXT,
+                resources.getString(R.string.share_link_format, arguments.model.imageSrcUrl)
+            )
+            type = SHARE_TYPE
+        }
+        val shareIntent = Intent.createChooser(intent, binding.twToolbarTitle.text)
+        startActivity(shareIntent)
     }
 
     private fun loadToolbar() {

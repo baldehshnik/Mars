@@ -5,4 +5,7 @@
     <string name="some_facts_about_mars">Некоторые факты о Марсе</string>
 
     <string name="image_number">Картинка %s</string>
+    <string name="share_link_format">
+        Хэй! Я отправляю тебе картинку Марса.\n\nТы можешь взглянуть на ее перейдя по ссылке ниже:\n%s
+    </string>
 </resources>

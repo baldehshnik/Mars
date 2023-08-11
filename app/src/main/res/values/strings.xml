@@ -5,5 +5,8 @@
 
     <string name="image_number" translatable="true">Image %s</string>
     <string name="fact_format" translatable="false"><![CDATA["&#160&#160<b>%1$d.</b> %2$s"]]></string>
+    <string name="share_link_format" translatable="true">
+        Hey! I\'m sending you a picture of Mars.\n\nYou can take a look at it by clicking on the link below:\n%s
+    </string>
 
 </resources>
