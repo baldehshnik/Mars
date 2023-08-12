@@ -5,6 +5,7 @@
     <string name="detail_image_view" translatable="false">ImageView in ImageDetailFragment</string>
     <string name="mars_item_image_view" translatable="false">ImageView in RecyclerView item</string>
     <string name="share_button" translatable="false">Share image</string>
+    <string name="no_connection_image" translatable="false">No connection image</string>
 
     <string name="transition_name" translatable="false">image</string>
 

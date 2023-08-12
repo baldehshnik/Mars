@@ -20,12 +20,15 @@ import com.firstapplication.mars.databinding.FragmentHomeBinding
 import com.firstapplication.mars.domain.model.MarsModel
 import com.firstapplication.mars.ui.adapter.MarsAdapter
 import com.firstapplication.mars.ui.utils.HomeFragmentLoadingViewState
+import com.firstapplication.mars.ui.utils.NetworkConnection
+import com.firstapplication.mars.ui.utils.NetworkStateObservable
+import com.firstapplication.mars.ui.utils.NetworkStateObserver
 import com.firstapplication.mars.ui.utils.OnMarsImageClickListener
 import com.firstapplication.mars.ui.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment(), OnMarsImageClickListener {
+class HomeFragment : BaseFragment(), OnMarsImageClickListener, NetworkStateObserver {
 
     private var recompose = false
 
@@ -33,6 +36,11 @@ class HomeFragment : BaseFragment(), OnMarsImageClickListener {
     private val binding: FragmentHomeBinding get() = _binding!!
 
     private val viewModel: HomeViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        NetworkStateObservable.observe(this)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -77,6 +85,17 @@ class HomeFragment : BaseFragment(), OnMarsImageClickListener {
         super.onDestroyView()
         _binding = null
         recompose = true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        NetworkStateObservable.unregister(this)
+    }
+
+    override fun onChanged(value: NetworkConnection) {
+        if (value == NetworkConnection.Connected) {
+            viewModel.readMarsModels()
+        }
     }
 
     private fun setToolbar() {

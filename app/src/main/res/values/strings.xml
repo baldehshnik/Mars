@@ -8,5 +8,8 @@
     <string name="share_link_format" translatable="true">
         Hey! I\'m sending you a picture of Mars.\n\nYou can take a look at it by clicking on the link below:\n%s
     </string>
+    <string name="no_connection_message" translatable="true">
+        Oops… Something went wrong.\n\nCheck your internet connection and try again!
+    </string>
 
 </resources>
