@@ -22,5 +22,6 @@ https://github.com/baldehshnik/Mars/assets/88383461/b5ff4838-91fd-4623-bc04-1ba6
 * Hilt to implement dependency injection
 * Coroutines for creating asynchronous requests
 * Navigation Component for creating application navigation
+* JUnit for writing unit tests
 
   
