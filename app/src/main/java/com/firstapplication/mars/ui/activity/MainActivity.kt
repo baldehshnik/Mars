@@ -44,6 +44,7 @@ class MainActivity : AppCompatActivity(), NetworkStateObserver {
             }
 
             NetworkConnection.Disconnected -> {
+                binding.noConnectionLayout.alpha = 1.0f
                 setAlphaAnimation(binding.noConnectionLayout, 1.0f)
                 setAlphaAnimation(binding.navContainer, 0.0f)
             }
